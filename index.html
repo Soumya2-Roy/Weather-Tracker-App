@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div>
+        <p class="eyebrow">WEATHER DASHBOARD</p>
+        <h1>Weather Tracker</h1>
+        <p class="subtitle">Your city, your weather.</p>
+      </div>
+      <div class="logo">☀️</div>
+    </header>
+
+    <form id="searchForm" class="search">
+      <span>⌕</span>
+      <input
+        id="cityInput"
+        type="text"
+        placeholder="Search a city, e.g. Kolkata"
+        aria-label="City name"
+        required
+      >
+      <button type="submit" id="searchButton">Search</button>
+    </form>
+
+    
+    <div class="toolbar">
+        <button type="button" id="locationButton">
+            📍 My Location
+        </button>
+
+        <button type="button" id="favoriteButton">
+            ☆ Add Favourite
+        </button>
+
+        <button type="button" id="themeButton">
+            🌙 Dark Mode
+        </button>
+    </div>
+
+    <section id="favoritesSection" class="favorites-section" hidden>
+        <h3>Favourite Cities</h3>
+        <div id="favoritesList" class="favorites-list"></div>
+    </section>
+
+
+    <p id="message" class="message" role="status">
+      Search for a city to see its current weather.
+    </p>
+
+    <section id="weatherPanel" class="weather-panel" hidden>
+      <div class="current-weather">
+        <div>
+          <p class="eyebrow">CURRENT WEATHER</p>
+          <h2 id="cityName">Kolkata</h2>
+          <p id="dateText" class="subtitle"></p>
+          <p id="description" class="description">Clear sky</p>
+          <div class="temperature">
+            <span id="temperature">--</span><span>°C</span>
+          </div>
+          <p id="feelsLike" class="subtitle">Feels like --°C</p>
+        </div>
+        <div class="weather-icon">
+          <img id="weatherIcon" alt="Weather condition">
+        </div>
+      </div>
+
+      <h3>Weather Details</h3>
+      <div class="metrics">
+        <article class="metric-card">
+          <span class="metric-icon">💧</span>
+          <p>Humidity</p>
+          <strong id="humidity">--%</strong>
+        </article>
+        <article class="metric-card">
+          <span class="metric-icon">💨</span>
+          <p>Wind Speed</p>
+          <strong id="windSpeed">-- m/s</strong>
+        </article>
+        <article class="metric-card">
+          <span class="metric-icon">🌡️</span>
+          <p>Pressure</p>
+          <strong id="pressure">-- hPa</strong>
+        </article>
+      </div>
+      
+    <section class="forecast-section">
+        <h3>5-Day Weather Forecast</h3>
+        <div id="forecastList" class="forecast-list"></div>
+    </section>
+
+      <p class="updated" id="updatedText"></p>
+    </section>
+
+    <footer>
+      Weather information provided by OpenWeather.
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
