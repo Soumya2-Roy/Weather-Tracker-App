@@ -377,3 +377,21 @@ body.light-theme .description {
 .recent-city:hover {
     opacity: 0.8;
 }
+
+/* Clear Recent Search History Button */
+
+#clearHistoryButton {
+    margin-top: 15px;
+    padding: 9px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #dc3545;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: opacity 0.2s ease;
+}
+
+#clearHistoryButton:hover {
+    opacity: 0.8;
+}

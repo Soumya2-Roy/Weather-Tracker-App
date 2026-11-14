@@ -34,6 +34,7 @@ const locationButton = $("locationButton");
 const forecastList = $("forecastList");
 const recentSearchesSection = $("recentSearchesSection");
 const recentSearchesList = $("recentSearchesList");
+const clearHistoryButton = $("clearHistoryButton");
 // ========================================
 // 2. APPLICATION STATE
 // ========================================
@@ -407,6 +408,36 @@ function renderRecentSearches() {
         recentSearchesList.appendChild(button);
     });
 }
+
+
+// ========================================
+// CLEAR RECENT SEARCH HISTORY
+// ========================================
+
+function clearRecentSearches() {
+
+    // Empty the recent searches array
+    recentSearches = [];
+
+    // Remove saved history from localStorage
+    try {
+        localStorage.removeItem("weatherRecentSearches");
+    } catch {
+        message.textContent =
+            "Unable to clear search history.";
+    }
+
+    // Update the user interface
+    renderRecentSearches();
+
+    message.textContent =
+        "Recent search history cleared successfully.";
+}
+
+// Handle Clear History button click
+clearHistoryButton.addEventListener("click", () => {
+    clearRecentSearches();
+});
 
 // ========================================
 // 7. FAVOURITE CITIES
