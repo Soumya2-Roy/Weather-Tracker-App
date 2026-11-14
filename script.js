@@ -32,7 +32,8 @@ const favoritesList = $("favoritesList");
 const themeButton = $("themeButton");
 const locationButton = $("locationButton");
 const forecastList = $("forecastList");
-
+const recentSearchesSection = $("recentSearchesSection");
+const recentSearchesList = $("recentSearchesList");
 // ========================================
 // 2. APPLICATION STATE
 // ========================================
@@ -56,6 +57,24 @@ function readFavorites() {
 }
 
 let favorites = readFavorites();
+
+// Recent search history
+function readRecentSearches() {
+    try {
+        const saved = JSON.parse(
+            localStorage.getItem("weatherRecentSearches") || "[]"
+        );
+
+        return Array.isArray(saved)
+            ? saved.filter(city => typeof city === "string")
+                .slice(0, 5)
+            : [];
+    } catch {
+        return [];
+    }
+}
+
+let recentSearches = readRecentSearches();
 
 // ========================================
 // 3. API HELPER FUNCTIONS
@@ -140,6 +159,7 @@ async function loadWeather(params) {
     if (requestId !== weatherRequestId) return;
 
     currentCity = data.name;
+    saveRecentSearch(currentCity);
 
     currentCoordinates = {
       lat: data.coord.lat,
@@ -152,6 +172,7 @@ async function loadWeather(params) {
     message.textContent = "Weather loaded successfully.";
 
     renderFavorites();
+    renderRecentSearches();
     updateFavoriteButton();
 
     // Load the forecast after current weather is available.
@@ -330,6 +351,61 @@ async function loadForecast(coords, requestId) {
       forecastList.appendChild(errorText);
     }
   }
+}
+
+
+
+// ========================================
+// 7. RECENT SEARCH HISTORY
+// ========================================
+
+function saveRecentSearch(city) {
+    if (!city) return;
+
+    // Remove duplicate city names
+    recentSearches = recentSearches.filter(
+        item => item.toLowerCase() !== city.toLowerCase()
+    );
+
+    // Add latest searched city at the beginning
+    recentSearches.unshift(city);
+
+    // Keep only the latest five cities
+    recentSearches = recentSearches.slice(0, 5);
+
+    try {
+        localStorage.setItem(
+            "weatherRecentSearches",
+            JSON.stringify(recentSearches)
+        );
+    } catch {
+        message.textContent =
+            "Unable to save recent searches.";
+    }
+
+    renderRecentSearches();
+}
+
+function renderRecentSearches() {
+    recentSearchesList.replaceChildren();
+
+    recentSearchesSection.hidden =
+        recentSearches.length === 0;
+
+    recentSearches.forEach(city => {
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "recent-city";
+        button.textContent = `🌤 ${city}`;
+
+        button.addEventListener("click", () => {
+            cityInput.value = city;
+            loadWeather({ q: city });
+        });
+
+        recentSearchesList.appendChild(button);
+    });
 }
 
 // ========================================
