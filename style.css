@@ -129,11 +129,7 @@ h1 {
   margin-top: 8px;
 }
 
-.temperature span:last-child {
-  font-size: 32px;
-  vertical-align: top;
-  letter-spacing: 0;
-}
+
 
 .weather-icon img {
   width: 145px;
@@ -394,4 +390,73 @@ body.light-theme .description {
 
 #clearHistoryButton:hover {
     opacity: 0.8;
+}
+
+
+/* ========================================
+   FINAL TEMPERATURE DISPLAY STYLING
+======================================== */
+
+.temperature-display {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 0;
+    margin: 12px 0;
+    white-space: nowrap;
+}
+
+#temperature {
+    display: inline-block;
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -3px;
+    margin: 0;
+    padding: 0;
+}
+
+#temperatureUnitLabel {
+    display: inline-block;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0 0 0 1px;
+    padding: 0;
+    position: relative;
+    top: 2px;
+}
+
+#feelsLike {
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+/* Weather icon */
+
+.weather-icon img {
+    width: 125px;
+    height: 125px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Mobile responsiveness */
+
+@media (max-width: 520px) {
+
+    #temperature {
+        font-size: 56px;
+    }
+
+    #temperatureUnitLabel {
+        font-size: 22px;
+    }
+
+    .weather-icon img {
+        width: 90px;
+        height: 90px;
+    }
 }

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +42,10 @@
         <button type="button" id="themeButton">
             🌙 Dark Mode
         </button>
+
+        <button type="button" id="temperatureUnitButton">
+            Switch to °F
+        </button>
     </div>
 
     <section id="favoritesSection" class="favorites-section" hidden>
@@ -75,9 +78,11 @@
           <h2 id="cityName">Kolkata</h2>
           <p id="dateText" class="subtitle"></p>
           <p id="description" class="description">Clear sky</p>
-          <div class="temperature">
-            <span id="temperature">--</span><span>°C</span>
+          
+          <div class="temperature-display">
+              <span id="temperature">--</span><span id="temperatureUnitLabel">°C</span>
           </div>
+
           <p id="feelsLike" class="subtitle">Feels like --°C</p>
         </div>
         <div class="weather-icon">
